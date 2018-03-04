@@ -1,0 +1,40 @@
+@use 'responsive';
+/// Scss utilties to create standardized BEM style identifiers
+///
+/// Usage in scss:
+///
+/// $ROOT: shared.makeRoot('Layout');
+/// @function el($name) {
+///   @return shared.makeSubElementName($ROOT, $name);
+/// }
+///
+/// ...
+///
+/// #{$ROOT} {
+///   <insert-css-rules-targeting-parent-here>
+/// }
+///
+/// ...
+///
+/// #{el('header')} {
+///   <insert-css-rules-targeting-subelement-here>
+///
+///   #{$ROOT}.has-sidebar & {
+///     <insert-css-rules-that-only-apply-when-root-has-sidebar>
+///   }
+/// }
+///
+$PREFIX: create-;
+$ELEMENT_SEPARATOR: __;
+
+@function makeRoot($name) {
+  @return #{'.'}#{$PREFIX}#{$name};
+}
+
+@function makeSubElementName($root, $name) {
+  @return #{$root}#{$ELEMENT_SEPARATOR}#{$name};
+}
+
+// shared css variables
+
+$LAYOUT_SIDEBAR_WIDTH: 192px;
