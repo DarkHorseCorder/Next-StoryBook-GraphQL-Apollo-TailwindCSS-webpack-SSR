@@ -1,0 +1,19 @@
+overwrite: true
+
+schema: http://localhost:8000/api
+
+generates:
+  ./src/generated/graphql.tsx:
+    documents:
+      - './**/*.gql'
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+    config:
+      namingConvention:
+        enumValues: keep
+
+config:
+  scalars:
+    DateTime: string
