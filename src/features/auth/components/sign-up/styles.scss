@@ -1,0 +1,12 @@
+@use '../../../../utils/shared';
+
+// config
+
+$ROOT: shared.makeRoot('SignUpForm');
+@function el($name) {
+  @return shared.makeSubElementName($ROOT, $name);
+}
+
+#{el('error')} {
+  @apply text-red-500;
+}
