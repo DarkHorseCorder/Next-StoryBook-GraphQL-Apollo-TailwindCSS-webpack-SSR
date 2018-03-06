@@ -1,0 +1,57 @@
+@use '../../utils/shared';
+
+// config
+
+$ROOT: shared.makeRoot('Text');
+
+// main
+
+#{$ROOT} {
+  &.type-h1 {
+    @apply text-h1;
+  }
+
+  &.type-h2 {
+    @apply text-h2;
+  }
+
+  &.type-h3 {
+    @apply text-h3;
+  }
+
+  &.type-h4 {
+    @apply text-h4;
+  }
+
+  &.type-h5 {
+    @apply text-h5;
+  }
+
+  &.type-h6 {
+    @apply text-h6;
+  }
+
+  &.type-body-lg {
+    @apply text-body-lg;
+  }
+
+  &.type-body-lg-heavy {
+    @apply text-body-lg-heavy;
+  }
+
+  &.type-body-md {
+    @apply text-body-md;
+  }
+
+  &.type-body-md-heavy {
+    @apply text-body-md-heavy;
+  }
+
+  &.type-body-sm {
+    @apply text-body-sm;
+  }
+
+  &.type-body-sm-heavy {
+    @apply text-body-sm-heavy;
+  }
+}
