@@ -1,0 +1,80 @@
+@use '../../utils/shared';
+
+$ROOT: shared.makeRoot('Toast');
+@function el($name) {
+  @return shared.makeSubElementName($ROOT, $name);
+}
+
+// main
+
+#{$ROOT} {
+  @apply min-w-[16rem] max-w-[20rem] w-max rounded-md;
+
+  // TODO: elevation utilities
+  box-shadow: 0px 6px 6px rgba(35, 31, 50, 0.1),
+    0px 0px 6px rgba(35, 31, 50, 0.1), 0px 0px 0px 1px rgba(35, 31, 50, 0.05);
+
+  @apply flex bg-white py-[.75rem] px-[1rem];
+
+  &:not(.has-description):not(.has-icon):not(.has-actions) {
+    @apply items-center;
+  }
+}
+
+#{el('icon')} {
+  #{$ROOT}.variant-success & {
+    @apply text-success-500;
+  }
+
+  #{$ROOT}.variant-error & {
+    @apply text-red-500;
+  }
+}
+
+#{el('content')} {
+  @apply mr-auto flex-grow;
+
+  #{$ROOT}.has-icon & {
+    @apply ml-[1rem];
+  }
+
+  #{$ROOT}.is-inline & {
+    @apply mr-[.5rem];
+  }
+}
+
+#{el('title')} {
+  @apply text-dark text-body-md-heavy;
+
+  #{$ROOT}.has-description & {
+    @apply mb-[.25rem];
+  }
+
+  #{$ROOT}.has-actions:not(.has-description):not(.is-inline) & {
+    @apply mb-[.5rem];
+  }
+
+  #{$ROOT}.is-inline & {
+    @apply mr-[.5rem];
+  }
+}
+
+#{el('dismiss-button')} {
+  @apply ml-[.5rem] mr-[.25rem];
+}
+
+#{el('description')} {
+  @apply text-subtle text-body-sm;
+
+  #{$ROOT}.has-actions & {
+    @apply mb-[.5rem];
+  }
+}
+
+#{el('actions')} {
+  @apply flex gap-x-[1rem] whitespace-nowrap;
+
+  #{$ROOT}.is-inline & {
+    @apply ml-auto mr-[.5rem] mt-[.125rem];
+  }
+}
