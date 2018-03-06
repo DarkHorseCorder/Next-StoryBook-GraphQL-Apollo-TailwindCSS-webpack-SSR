@@ -1,0 +1,21 @@
+@use '../../utils/shared';
+
+// config
+
+$ROOT: shared.makeRoot('Tooltip');
+@function el($name) {
+  @return shared.makeSubElementName($ROOT, $name);
+}
+
+#{$ROOT} {
+  @apply rounded-md min-h-[20px] min-w-[40px] max-w-[256px];
+  @apply border-b-2 border-light-gray-300;
+  @apply bg-white text-dark text-center py-[4px] px-[8px] whitespace-pre;
+  // @TODO shadow utilities
+  box-shadow: 0px 6px 6px rgba(35, 31, 50, 0.1),
+    0px 0px 6px rgba(35, 31, 50, 0.1), 0px 0px 0px 1px rgba(35, 31, 50, 0.05);
+}
+
+#{el('arrow')} {
+  @apply fill-current;
+}
