@@ -1,0 +1,19 @@
+@use '../../utils/shared';
+
+// config
+
+$ROOT: shared.makeRoot('Icon');
+
+// main
+
+#{$ROOT} {
+  @apply fill-current flex-shrink-0;
+
+  &.size-medium {
+    @apply w-[1.25rem] h-[1.25rem];
+  }
+
+  &.size-small {
+    @apply w-[1rem] h-[1rem];
+  }
+}
