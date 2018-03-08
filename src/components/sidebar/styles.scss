@@ -1,0 +1,151 @@
+@use '../../utils/shared';
+
+// config 
+
+$ROOT: shared.makeRoot('Sidebar');
+@function el($name) {
+  @return shared.makeSubElementName($ROOT, $name);
+}
+
+#{$ROOT} {
+  @apply flex flex-col p-0 py-[8px] border-r-2 border-gray-500 border-opacity-10;
+  @apply transition-all duration-500 min-h-full;
+
+  &.size-small {
+    @apply w-[256px];
+
+    &.is-collapsed {
+      @apply w-[48px];
+    }
+  }
+  &.size-medium {
+    @apply w-[320px];
+
+    &.is-collapsed {
+      @apply w-[64px];
+    }
+  }
+  &.size-large {
+    @apply w-[384px];
+
+    &.is-collapsed {
+      @apply w-[96px];
+    }
+  }
+
+  &.is-dark {
+    @apply bg-dark-gray-600 text-gray-50;
+  }
+}
+
+#{el('logo')} {
+  @apply p-[8px];
+}
+
+#{el('item')} {
+  @apply flex relative bg-transparent py-[16px] w-full text-gray-900 transition-all select-none;
+
+  #{$ROOT}.size-small & {
+    @apply px-[16px] gap-[16px];
+  }
+  #{$ROOT}.size-medium & {
+    @apply px-[20px] gap-[20px];
+  }
+  #{$ROOT}.size-large & {
+    @apply px-[32px] gap-[32px];
+  }
+
+  &.is-hovered {
+    @apply bg-gray-50;
+    
+    #{$ROOT}.is-dark & {
+      @apply bg-dark-gray-800;
+    }
+  }
+  &.is-pressed {
+    @apply bg-gray-100;
+
+    #{$ROOT}.is-dark & {
+      @apply bg-dark-gray-900;
+    }
+  }
+  &.is-interactive {
+    @apply cursor-pointer;
+  }
+}
+
+#{el('item-icon')} {
+  @apply w-[16px] h-[16px] text-gray-600;
+
+  #{$ROOT}.size-medium & {
+    @apply w-[24px] h-[24px];
+  }
+  #{$ROOT}.size-large & {
+    @apply w-[32px] h-[32px];
+  }
+
+  #{el('item')}.is-selected & {
+    @apply text-purple-600;
+  }
+}
+
+#{el('item-label')} {
+  @apply line-clamp-1 text-gray-900;
+
+  #{$ROOT}.is-dark & {
+    @apply text-gray-50;
+  }
+
+  #{$ROOT}.size-small & {
+    @apply text-xs leading-[16px];
+  }
+
+  #{$ROOT}.size-medium & {
+    @apply text-base leading-[24px];
+  }
+
+  #{$ROOT}.size-large & {
+    @apply text-xl leading-[32px];
+  }
+}
+
+#{el('item-badge')} {
+  @apply absolute rounded-md bg-purple-100 text-purple-600 transition-all duration-500;
+
+  #{$ROOT}.size-small &, #{$ROOT}.size-medium &, #{$ROOT}.size-large & {
+    @apply text-xs leading-[20px] w-[20px] h-[20px] right-[16px];
+  }
+
+  #{$ROOT}.is-dark & {
+    @apply bg-purple-600 text-purple-50;
+  }
+
+  #{$ROOT}.size-small & {
+    @apply top-[14px];
+  }
+
+  #{$ROOT}.size-medium & {
+    @apply top-[18px];
+  }
+
+  #{$ROOT}.size-large & {
+    @apply top-[22px];
+  }
+
+  #{$ROOT}.is-collapsed & {
+    @apply rounded-full bg-purple-600 text-purple-50 text-[10px] w-[16px] h-[16px];
+  }
+  #{$ROOT}.is-collapsed.size-small & {
+    @apply right-[6px] top-[8px];
+  }
+  #{$ROOT}.is-collapsed.size-medium & {
+    @apply right-[10px] top-[10px];
+  }
+  #{$ROOT}.is-collapsed.size-large & {
+    @apply right-[20px] top-[12px];
+  }
+}
+
+#{el('item-padder')} {
+  @apply flex-grow;
+}
