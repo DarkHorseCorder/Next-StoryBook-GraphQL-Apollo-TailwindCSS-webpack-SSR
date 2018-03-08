@@ -1,0 +1,119 @@
+@use '../../utils/shared';
+
+// config 
+
+$ROOT: shared.makeRoot('StatCard');
+@function el($name) {
+  @return shared.makeSubElementName($ROOT, $name);
+}
+
+#{$ROOT} {
+  @apply flex bg-white relative flex-shrink-0 gap-[8px] justify-between rounded-md shadow-sm;
+  @apply h-[80px] py-[12px] select-none;
+
+  &.is-interactive {
+    @apply cursor-pointer;
+  }
+
+  &.size-small {
+    @apply w-[160px] px-[12px];
+  }
+
+  &.size-medium {
+    @apply w-[240px] px-[12px];
+  }
+
+  &.size-large {
+    @apply w-[320px] px-[16px];
+  }
+}
+
+#{el('content')} {
+  @apply flex flex-col justify-around flex-grow;
+}
+
+#{el('trend-end')}, #{el('trend-center')} {
+  @apply flex-shrink-0 w-[48px] h-full flex justify-end items-center;
+
+  #{$ROOT}.size-medium & {
+    @apply w-[64px];
+  }
+
+  #{$ROOT}.size-large & {
+    @apply w-[80px];
+  }
+}
+
+#{el('trend-end')} {
+  @apply pt-[32px];
+}
+
+#{el('trend-center')} {
+  @apply py-[16px];
+}
+
+#{el('icon')} {
+  @apply w-[20px] h-[20px] rounded-md;
+}
+
+#{el('title')} {
+  @apply line-clamp-1 opacity-90;
+
+  #{$ROOT} & {
+    @apply text-heavy;
+  }
+}
+
+#{el('title-badge')} {
+  @apply flex justify-between items-center;
+}
+
+#{el('desc')} {
+  @apply font-normal text-gray-600 line-clamp-1 mt-0;
+
+  #{$ROOT} & {
+    @apply leading-[12px];
+  }
+}
+
+#{el('overlay')} {
+  @apply absolute top-0 left-0 w-full h-full bg-dark-gray-600 transition rounded-md opacity-0;
+
+  #{$ROOT}.is-hovered & {
+    @apply opacity-30;
+  }
+
+  #{$ROOT}.is-focus-visible & {
+    @apply outline-default;
+  }
+
+  #{$ROOT}.is-pressed & {
+    @apply opacity-50;
+  }
+}
+
+#{el('variant-icon')} {
+  @apply m-0;
+}
+
+#{el('badge')} {
+
+  @apply absolute top-[12px] right-[12px] rounded-md px-[8px] py-[4px];
+  @apply  stroke-2;
+
+  #{$ROOT}.variant-default & {
+    @apply text-dark bg-light-gray-500;
+  }
+
+  #{$ROOT}.variant-positive & {
+    @apply text-green-700 bg-green-100;
+  }
+
+  #{$ROOT}.variant-negative & {
+    @apply text-red-700 bg-red-100;
+  }
+
+  #{el('title-badge')} & {
+    @apply static;
+  }
+}
