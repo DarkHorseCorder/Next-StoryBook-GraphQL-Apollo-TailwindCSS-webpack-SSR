@@ -1,0 +1,126 @@
+@use '../../utils/shared';
+
+// config
+
+$ROOT: shared.makeRoot('Link');
+@function el($name) {
+  @return shared.makeSubElementName($ROOT, $name);
+}
+
+// main
+
+#{$ROOT} {
+  @apply inline-flex cursor-pointer;
+
+  // focus
+
+  @apply focus:outline-none;
+
+  &.is-focused {
+    @apply ring-2 ring-blue-200 ring-offset-2;
+  }
+
+  // colors
+
+  &.variant-default {
+    @apply text-accent;
+  }
+
+  &.variant-monochrome {
+    @apply text-dark;
+  }
+
+  &.variant-white {
+    @apply text-white;
+  }
+
+  &.variant-information {
+    @apply text-blue-500;
+  }
+
+  &.variant-warning {
+    @apply text-yellow-500;
+  }
+
+  &.variant-danger {
+    @apply text-orange-500;
+  }
+
+  // hover
+
+  &.is-hovered {
+    &.variant-default {
+      @apply text-red-600;
+    }
+
+    &.variant-information {
+      @apply text-blue-600;
+    }
+
+    &.variant-warning {
+      @apply text-yellow-600;
+    }
+
+    &.variant-danger {
+      @apply text-orange-600;
+    }
+  }
+
+  // press
+
+  &.is-pressed {
+    &.variant-default {
+      @apply text-red-700;
+    }
+
+    &.variant-information {
+      @apply text-blue-700;
+    }
+
+    &.variant-warning {
+      @apply text-yellow-700;
+    }
+
+    &.variant-danger {
+      @apply text-orange-700;
+    }
+  }
+
+  // disabled
+
+  &.is-disabled {
+    &.variant-default {
+      @apply text-red-100;
+    }
+
+    &.variant-monochrome {
+      @apply text-disabled;
+    }
+
+    &.variant-white {
+      @apply text-opacity-40;
+    }
+
+    &.variant-information {
+      @apply text-blue-100;
+    }
+
+    &.variant-warning {
+      @apply text-yellow-100;
+    }
+
+    &.variant-danger {
+      @apply text-orange-100;
+    }
+  }
+}
+
+// text
+
+#{el('label')} {
+  @apply text-body-md;
+
+  #{$ROOT}.is-hovered & {
+    @apply underline;
+  }
+}

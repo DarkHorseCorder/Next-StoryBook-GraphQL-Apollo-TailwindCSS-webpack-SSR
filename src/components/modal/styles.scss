@@ -1,0 +1,147 @@
+@use '../../utils/shared';
+
+// config
+
+$ROOT: shared.makeRoot('Modal');
+@function el($name) {
+  @return shared.makeSubElementName($ROOT, $name);
+}
+
+$TRANSITION_DURATION: 120ms;
+
+// main
+
+#{$ROOT} {
+  @apply fixed rounded top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  box-shadow: 0px 20px 20px rgba(35, 31, 50, 0.1),
+    0px 0px 20px rgba(35, 31, 50, 0.1), 0px 0px 0px 1px rgba(35, 31, 50, 0.05);
+
+  @apply bg-white px-[1.5rem];
+
+  // focus
+
+  @apply focus:outline-none;
+
+  // sizes
+
+  &.size-medium {
+    @apply w-[40rem];
+  }
+
+  &.size-small {
+    @apply w-[20rem];
+  }
+}
+
+// header
+
+#{el('header')} {
+  @apply rounded relative h-[4rem];
+
+  @apply flex items-center justify-center;
+}
+
+#{el('header-close-button')} {
+  @apply mr-auto;
+
+  // layout fix
+  @apply ml-[-.5rem];
+}
+
+#{el('header-titles')} {
+  @apply absolute inset-0;
+
+  @apply flex flex-col text-center justify-center pointer-events-none select-none;
+}
+
+#{el('header-title')} {
+  @apply text-dark text-body-md-heavy;
+}
+
+#{el('header-subtitle')} {
+  @apply text-subtle text-body-sm;
+}
+
+#{el('header-actions')} {
+  @apply ml-auto;
+
+  @apply flex justify-end gap-x-[.25rem];
+
+  // layout fix
+  @apply mr-[-.375rem];
+}
+
+// footer
+
+#{el('footer')} {
+  @apply rounded h-[5.5rem];
+
+  @apply flex items-center justify-end gap-x-[.25rem];
+}
+
+// overlay
+
+$OVERLAY_TRANSITION_DURATION: 80ms;
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes overlayFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+#{el('overlay')} {
+  @apply fixed inset-0;
+
+  @apply bg-[#1F1440] bg-opacity-20;
+
+  // transition
+
+  &[data-state='open'] {
+    animation: overlayFadeIn $OVERLAY_TRANSITION_DURATION ease-in;
+  }
+  &[data-state='close'] {
+    animation: overlayFadeOut $OVERLAY_TRANSITION_DURATION ease-in;
+  }
+}
+
+// transition
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+#{$ROOT} {
+  &[data-state='open'] {
+    animation: fadeIn $TRANSITION_DURATION ease-in;
+  }
+
+  &[data-state='close'] {
+    animation: fadeOut $TRANSITION_DURATION ease-in;
+  }
+}
