@@ -1,0 +1,454 @@
+@use '../../utils/shared';
+
+// config
+
+$ROOT: shared.makeRoot("Button");
+@function el($name) {
+  @return shared.makeSubElementName($ROOT, $name);
+}
+
+// main
+
+#{$ROOT} {
+  // outer
+  @apply rounded-md select-none border-0 whitespace-nowrap overflow-hidden overflow-ellipsis;
+  // inner
+  @apply flex items-center justify-center transition flex-shrink-0;
+
+  // focus
+
+  @apply focus:outline-none;
+
+  &.is-focused {
+    @apply ring-2 ring-blue-300 ring-offset-2;
+  }
+
+  // sizes
+
+  &.size-xs {
+    @apply px-[.5rem] h-[1.5rem];
+
+    &.is-icon-button {
+      @apply px-[.125rem];
+
+      &:not(.is-dropdown) {
+        @apply w-[1.5rem];
+      }
+    }
+
+    &.is-dropdown {
+      @apply pr-[.1875rem];
+    }
+  }
+
+  &.size-small {
+    @apply px-[.625rem] h-[2rem];
+
+    &.is-icon-button {
+      @apply px-[.375rem];
+
+      &:not(.is-dropdown) {
+        @apply w-[2rem];
+      }
+    }
+
+    &.is-dropdown {
+      @apply pr-[.3125rem];
+    }
+  }
+
+  &.size-medium {
+    @apply px-[1rem] h-[2.5rem];
+
+    &.is-icon-button {
+      @apply px-[.625rem];
+
+      &:not(.is-dropdown) {
+        @apply w-[2.5rem];
+      }
+    }
+
+    &.is-dropdown {
+      @apply pr-[.6875rem];
+    }
+  }
+
+  // disabled
+
+  &.is-disabled {
+    @apply cursor-not-allowed pointer-events-none;
+    opacity: 33%;
+  }
+
+  // variants
+
+  &.variant-default {
+    // ghost
+
+    &:not(.is-ghost) {
+      @apply bg-light-gray-500;
+    }
+    &.is-ghost {
+      @apply bg-transparent;
+    }
+
+    // not selected
+
+    &:not(.is-selected) {
+      @apply text-dark;
+
+      &.is-hovered {
+        @apply bg-light-gray-600;
+      }
+      &.is-focused {
+        @apply bg-light-gray-500;
+      }
+      &.is-pressed {
+        @apply bg-light-gray-700;
+      }
+    }
+
+    // selected
+
+    &.is-selected {
+      @apply text-accent bg-red-50;
+
+      // TODO don't have a color scale color for these
+      &.is-hovered {
+        background: #ffe0e6;
+      }
+      &.is-focused {
+        @apply bg-red-50;
+      }
+      &.is-pressed {
+        background: #ffd5dd;
+      }
+    }
+  }
+
+  &.variant-primary {
+    // not ghost
+
+    &:not(.is-ghost) {
+      // not selected
+
+      &:not(.is-selected) {
+        @apply bg-red-500 text-white;
+
+        &.is-hovered {
+          @apply bg-red-600 text-white;
+        }
+        &.is-pressed {
+          @apply bg-red-700 text-white;
+        }
+      }
+
+      // selected
+
+      &.is-selected {
+        @apply bg-red-800 text-white;
+
+        &.is-hovered {
+          @apply bg-red-800;
+        }
+        &.is-pressed {
+          @apply bg-red-900;
+        }
+      }
+    }
+
+    // ghost
+
+    &.is-ghost {
+      // not selected
+
+      &:not(.is-selected) {
+        @apply bg-transparent text-red-500;
+
+        &.is-hovered,
+        &.is-focused {
+          @apply bg-red-50;
+        }
+        &.is-pressed {
+          @apply bg-red-100;
+        }
+      }
+
+      // selected
+
+      &.is-selected {
+        @apply bg-red-500 text-white;
+
+        &.is-hovered {
+          @apply bg-red-600;
+        }
+        &.is-focused {
+          @apply bg-red-500;
+        }
+        &.is-pressed {
+          @apply bg-red-700;
+        }
+      }
+    }
+  }
+
+  &.variant-success {
+    // not ghost
+
+    &:not(.is-ghost) {
+      @apply text-white bg-success-500;
+
+      // not selected
+
+      &:not(.is-selected) {
+        &.is-hovered {
+          @apply bg-success-600;
+        }
+        &.is-pressed {
+          @apply bg-success-700;
+        }
+      }
+
+      // selected
+
+      &.is-selected {
+        @apply bg-success-800;
+
+        &.is-pressed {
+          @apply bg-success-900;
+        }
+      }
+    }
+
+    // ghost
+
+    &.is-ghost {
+      // not selected
+      &:not(.is-selected) {
+        @apply bg-transparent text-green-500;
+
+        &.is-hovered,
+        &.is-focused {
+          @apply bg-green-50;
+        }
+        &.is-pressed {
+          @apply bg-green-100;
+        }
+      }
+
+      // selected
+
+      &.is-selected {
+        @apply bg-green-500 text-white;
+
+        &.is-hovered,
+        &.is-focused {
+          @apply bg-green-600;
+        }
+        &.is-pressed {
+          @apply bg-green-700;
+        }
+      }
+    }
+  }
+
+  &.variant-danger {
+    // not ghost
+    &:not(.is-ghost) {
+      @apply text-white bg-danger-500;
+
+      // not selected
+      &:not(.is-selected) {
+        &.is-hovered {
+          @apply bg-danger-600;
+        }
+        &.is-pressed {
+          @apply bg-danger-700;
+
+          // selected
+        }
+      }
+      &.is-selected {
+        @apply bg-danger-800;
+
+        &.is-pressed {
+          @apply bg-danger-900;
+        }
+      }
+    }
+
+    // ghost
+
+    &.is-ghost {
+      // not selected
+
+      &:not(.is-selected) {
+        @apply bg-transparent text-danger-500;
+
+        &.is-hovered,
+        &.is-focused {
+          @apply bg-danger-50;
+        }
+        &.is-pressed {
+          @apply bg-danger-100;
+        }
+      }
+
+      // selected
+
+      &.is-selected {
+        @apply bg-danger-500 text-white;
+
+        &.is-hovered,
+        &.is-focused {
+          @apply bg-danger-600;
+        }
+        &.is-pressed {
+          @apply bg-danger-700;
+        }
+      }
+    }
+  }
+
+  &.variant-dark {
+    @apply text-dark bg-black;
+
+    // not ghost
+    &:not(.is-ghost) {
+      // not selected
+      &:not(.is-selected) {
+        @apply bg-opacity-5;
+
+        &.is-hovered {
+          @apply bg-opacity-10;
+        }
+        &.is-pressed {
+          @apply bg-opacity-[15%];
+        }
+      }
+
+      // selected
+
+      &.is-selected {
+        @apply bg-opacity-[15%];
+
+        &.is-hovered {
+          @apply bg-opacity-20;
+        }
+        &.is-pressed {
+          @apply bg-opacity-[25%];
+        }
+      }
+    }
+
+    // ghost
+
+    &.is-ghost {
+      // not selected
+      &:not(.is-selected) {
+        @apply bg-opacity-0;
+
+        &.is-hovered {
+          @apply bg-opacity-[5%];
+        }
+        &.is-pressed {
+          @apply bg-opacity-10;
+        }
+      }
+      // selected
+      &.is-selected {
+        @apply bg-opacity-10;
+
+        &.is-hovered {
+          @apply bg-opacity-[15%];
+        }
+        &.is-pressed {
+          @apply bg-opacity-20;
+        }
+      }
+    }
+  }
+
+  &.variant-light {
+    @apply text-white bg-white;
+
+    // not ghost
+    &:not(.is-ghost) {
+      // not selected
+      &:not(.is-selected) {
+        @apply bg-opacity-10;
+
+        &.is-hovered {
+          @apply bg-opacity-[15%];
+        }
+        &.is-pressed {
+          @apply bg-opacity-20;
+
+          // selected
+        }
+      }
+
+      &.is-selected {
+        @apply bg-opacity-40;
+
+        &.is-hovered {
+          @apply bg-opacity-50;
+        }
+        &.is-pressed {
+          @apply bg-opacity-60;
+        }
+      }
+    }
+
+    // ghost
+
+    &.is-ghost {
+      // not selected
+      &:not(.is-selected) {
+        @apply bg-opacity-0;
+
+        &.is-hovered {
+          @apply bg-opacity-10;
+        }
+        &.is-pressed {
+          @apply bg-opacity-20;
+        }
+      }
+
+      // selected
+
+      &.is-selected {
+        @apply bg-opacity-40;
+
+        &.is-hovered {
+          @apply bg-opacity-50;
+        }
+        &.is-pressed {
+          @apply bg-opacity-60;
+        }
+      }
+    }
+  }
+}
+
+// icon
+
+#{el('icon')} {
+  @apply w-[1.25rem] h-[1.25rem];
+}
+
+// label
+
+#{el('label')} {
+  @apply truncate;
+
+  #{$ROOT}.has-icon & {
+    @apply pl-[.375rem];
+  }
+}
+
+// dropdown icon
+
+#{el('dropdown-icon')} {
+  @apply w-[1.25rem] h-[1.25rem];
+}
