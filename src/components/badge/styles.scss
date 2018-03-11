@@ -1,0 +1,65 @@
+@use '../../utils/shared';
+
+// config
+
+$ROOT: shared.makeRoot('Badge');
+@function el($name) {
+  @return shared.makeSubElementName($ROOT, $name);
+}
+
+#{$ROOT} {
+  @apply rounded-full overflow-hidden;
+  @apply flex justify-center items-center select-none whitespace-nowrap;
+
+  @apply focus:outline-none;
+
+  // sizes
+
+  &.size-small {
+    @apply text-body-sm h-[20px] px-[8px];
+
+    &.has-icon {
+      @apply pl-[6px];
+    }
+  }
+
+  &.size-medium {
+    @apply text-body-md h-[24px] px-[8px];
+
+    &.has-icon {
+      @apply pl-[8px];
+    }
+  }
+
+  // spacing
+
+  &.has-icon {
+    & span {
+      @apply pl-[4px];
+    }
+  }
+
+  // variants
+
+  &.variant-default {
+    @apply text-dark bg-light-gray-500;
+
+    &.is-hovered {
+      @apply bg-light-gray-600;
+    }
+  }
+}
+
+#{el('icon')} {
+  @apply w-[16px] h-[16px];
+}
+
+#{el('dismiss-button')} {
+  @apply appearance-none border-none ml-[10px] w-[12px] h-[12px] text-white flex justify-center items-center;
+
+  @apply focus:outline-none;
+}
+
+#{el('dismiss-button-icon')} {
+  @apply cursor-pointer w-[6px] h-[6px];
+}
