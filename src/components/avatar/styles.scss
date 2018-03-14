@@ -1,0 +1,115 @@
+@use '../../utils/shared';
+
+// config
+
+$ROOT: shared.makeRoot('Avatar');
+@function el($name) {
+  @return shared.makeSubElementName($ROOT, $name);
+}
+
+$FADEIN_DURATION: 0.25s;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#{$ROOT} {
+  @apply flex-shrink-0 select-none relative transition;
+  @apply flex justify-center items-center bg-light-gray-500 rounded-full;
+
+  // focus
+
+  @apply focus:outline-none;
+
+  // sizes
+
+  &.size-xs {
+    @apply w-[20px] h-[20px];
+  }
+
+  &.size-small {
+    @apply w-[24px] h-[24px];
+  }
+
+  &.size-medium {
+    @apply w-[32px] h-[32px];
+  }
+
+  &.size-large {
+    @apply w-[40px] h-[40px];
+  }
+
+  &.size-xl {
+    @apply w-[48px] h-[48px];
+  }
+
+  &.size-2xl {
+    @apply w-[64px] h-[64px];
+  }
+}
+
+#{el('ring')} {
+  @apply h-full w-full absolute top-0 left-0 rounded-full;
+}
+
+#{el('image')} {
+  @apply object-cover w-full h-full rounded;
+}
+
+#{el('initials')} {
+  @apply text-white;
+
+  #{$ROOT}:is(.size-small, .size-xs) & {
+    @apply text-body-md;
+  }
+
+  #{$ROOT}:is(.size-medium, .size-lg) & {
+    @apply text-h2;
+  }
+
+  #{$ROOT}:is(.size-xl, .size-2xl) & {
+    @apply text-h1;
+  }
+}
+
+#{el('icon')} {
+  @apply text-gray-500;
+
+  #{$ROOT}:is(.size-small, .size-xs) & {
+    @apply h-[12px] w-[12px];
+    height: 0.75rem;
+    width: 0.75rem;
+  }
+
+  #{$ROOT}.size-medium & {
+    @apply h-[16px] w-[16px];
+  }
+
+  #{$ROOT}.size-large & {
+    @apply h-[20px] w-[20px];
+  }
+
+  #{$ROOT}.size-xl & {
+    @apply h-[24px] w-[24px];
+  }
+
+  #{$ROOT}.size-2xl & {
+    @apply h-[32px] w-[32px];
+  }
+}
+
+#{el('overlay')} {
+  @apply absolute top-0 left-0 w-full h-full bg-dark-gray-600 rounded-full transition opacity-0;
+
+  #{$ROOT}.is-hovered & {
+    @apply opacity-30;
+  }
+
+  #{$ROOT}.is-pressed & {
+    @apply opacity-50;
+  }
+}
