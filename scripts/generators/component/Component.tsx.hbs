@@ -1,0 +1,28 @@
+import clsx from 'clsx';
+import React, { ReactElement } from 'react';
+import {
+  makeElementClassNameFactory,
+  makeRootClassName,
+  StyleProps,
+} from '@/utils';
+
+export type {{properCase name}}Props = StyleProps & {
+  // add props here
+};
+
+const ROOT = makeRootClassName('{{ properCase name}}');
+const el = makeElementClassNameFactory(ROOT);
+
+const DEFAULT_PROPS = {} as const;
+
+function {{properCase name}}(props: {{properCase name}}Props): ReactElement { 
+  const p = { ...DEFAULT_PROPS, ...props };
+
+  return (
+    <div className={clsx(ROOT, p.className)}>
+      TODO: {{properCase name}} is not implemented.
+    </div>
+  ); 
+};
+
+export default {{ properCase name}};

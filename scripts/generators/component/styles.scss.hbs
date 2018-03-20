@@ -1,0 +1,12 @@
+@use '{{ pathToSrc }}/utils/shared';
+
+// config 
+
+$ROOT: shared.makeRoot('{{ properCase name }}');
+@function el($name) {
+  @return shared.makeSubElementName($ROOT, $name);
+}
+
+#{$ROOT} {
+  // styles here
+}
