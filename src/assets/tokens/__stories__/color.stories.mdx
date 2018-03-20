@@ -1,0 +1,116 @@
+import { Meta, Canvas, Story } from "@storybook/addon-docs/blocks";
+import globalTokens from "../custom/global";
+import contrast from "contrast";
+
+<Meta
+  title="Tokens/Color"
+  parameters={{
+    previewTabs: {
+      canvas: { hidden: true },
+    },
+  }}
+/>
+
+# Color
+
+Color tokens are available as Tailwind utilities. For example:
+
+- `bg-orange-600`
+
+<Color className="w-64" value={globalTokens.colors.orange[600]} />
+
+- `text-blue-400`
+
+<p style={{ color: globalTokens.colors.blue[400] }}>
+  I'm blue, da ba dee da ba daa!
+</p>
+
+- `border-green-700`
+
+<div className="h-10 w-64 border-4 border-green-700 rounded" />
+
+For other utilities that support color, check the [Tailwind documentation](https://tailwindcss.com/).
+
+## Colors
+
+export const colors = (function () {
+  const { white, transparent, black, ...palettes } = globalTokens.colors;
+  return { white, transparent, black, palettes };
+})();
+
+export function Color({ value, className, forceBlack, withRing }) {
+  const type = contrast(value);
+  return (
+    <div
+      className={`${className} h-10 rounded justify-center flex items-center text-body-md-heavy text-opacity-0 hover:text-opacity-100 transition ${
+        type === "light" || forceBlack ? "text-black" : "text-white"
+      } ${withRing ? "ring-1 ring-offset-2 ring-black" : ""}`}
+      style={{ backgroundColor: value }}
+    >
+      {value.toLowerCase()}
+    </div>
+  );
+}
+
+export function Header({ children, className }) {
+  return <div className={`${className} text-h4 text-center`}>{children}</div>;
+}
+
+<Canvas>
+  <div>
+    <div className="grid grid-cols-3 gap-4 w-full mb-16">
+      <Header>White</Header>
+      <Header>Black</Header>
+      <Header>Transparent</Header>
+      <Color value={colors.white} withRing />
+      <Color value={colors.black} withRing />
+      <Color value={colors.transparent} withRing forceBlack />
+    </div>
+    <div className="grid grid-cols-12 w-full gap-1">
+      {/* headers */}
+      <Header className="col-span-2 mb-4">Color</Header>
+      <Header>50</Header>
+      <Header>100</Header>
+      <Header>200</Header>
+      <Header>300</Header>
+      <Header>400</Header>
+      <Header>500</Header>
+      <Header>600</Header>
+      <Header>700</Header>
+      <Header>800</Header>
+      <Header>900</Header>
+      {/* colors */}
+      {Object.entries(colors.palettes).map(([name, values]) => [
+        <div className="col-span-2 text-body-lg flex items-center justify-center">
+          {name.replace(/\b[a-z]/g, (s) => s.toUpperCase()).replace(/-/g, " ")}
+        </div>,
+        <Color value={values["50"] ?? ""} />,
+        ...Object.entries(values).map(([variant, value]) =>
+          variant === "50" ? null : <Color value={value} />
+        ),
+      ])}
+    </div>
+  </div>
+</Canvas>
+
+## Text colors
+
+Text can be styled with any color above. Additionally, the following colors are exclusively available for text:
+
+export function TextColor({ color, name }) {
+  return (
+    <span className="text-body-lg-heavy" style={{ color }}>
+      {name}
+    </span>
+  );
+}
+
+<Canvas>
+  <div className="flex justify-center gap-x-8">
+    <TextColor name="Accent" color={globalTokens.textColor.accent} />
+    <TextColor name="Dark" color={globalTokens.textColor.dark} />
+    <TextColor name="Disabled" color={globalTokens.textColor.disabled} />
+    <TextColor name="Subtle" color={globalTokens.textColor.subtle} />
+    <TextColor name="Warning" color={globalTokens.textColor.warning} />
+  </div>
+</Canvas>
